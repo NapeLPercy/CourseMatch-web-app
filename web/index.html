@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            /* Custom styles */
+            .custom-input {
+                width: 250px; /* Set width to 200px */
+            }
+            button{
+                width: 200px;
+            }
+
+            body{
+                font-family: Arial;
+            }
+            p{
+                letter-spacing: 1.2px;
+                font-size: 14px;
+                transition: color 0.5s ease, opacity 5s ease, font-size 10s ease;
+                margin-left: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <form action="LoginController" method="POST" id="form">
+                <fieldset>
+                    <legend>Login</legend>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <p id="username_error"></p>
+                        <input type="text" class="form-control custom-input" id="username" name="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <p id="password_error"></p>
+                        <input type="password" class="form-control custom-input" id="password" name="password" >
+                    </div>
+
+                    <p>Don't have account? click <a href="Views/Inputs/CreateAccount.jsp">here</a></p>
+                    <button type="submit" id="login_btn" class="btn btn-primary">Login</button>
+
+                </fieldset>
+            </form>
+        </div>
+
+    </body>
+</html>
+<!-- Include jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Bootstrap JS (make sure this comes after jQuery) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+    const login_btn = document.getElementById("login_btn");
+
+    let password_valid = false;
+    let username_valid = false;
+
+    login_btn.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        if (username.value === "") {
+            updateErrorView(username_error, "You must enter a username");
+        } else {
+            updateErrorView(username_error, "");
+            username_valid = true;
+        }
+
+        if (password.value === "") {
+            updateErrorView(password_error, "You must enter a password");
+        } else {
+            updateErrorView(password_error, "");
+            password_valid = true;
+        }
+        
+        if(password_valid && username_valid){
+            document.getElementById("form").submit();
+        }
+    });
+    function updateErrorView(element_name, error_message) {
+        element_name.style.color = "red";
+        element_name.innerText = error_message;
+    }
+</script>
