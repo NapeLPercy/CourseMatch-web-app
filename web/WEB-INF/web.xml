@@ -2,39 +2,39 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>SubjectController</servlet-name>
-        <servlet-class>Controllers.SubjectController</servlet-class>
+        <servlet-class>coursematch.controllers.SubjectController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>Controllers.LoginController</servlet-class>
+        <servlet-class>coursematch.controllers.LoginController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserController</servlet-name>
-        <servlet-class>Controllers.UserController</servlet-class>
+        <servlet-class>coursematch.controllers.UserController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StudentController</servlet-name>
-        <servlet-class>Controllers.StudentController</servlet-class>
+        <servlet-class>coursematch.controllers.StudentController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QualificationController</servlet-name>
-        <servlet-class>Controllers.QualificationController</servlet-class>
+        <servlet-class>coursematch.controllers.QualificationController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutController</servlet-name>
-        <servlet-class>Controllers.LogoutController</servlet-class>
+        <servlet-class>coursematch.controllers.LogoutController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowSubjectsController</servlet-name>
-        <servlet-class>Controllers.ShowSubjectsController</servlet-class>
+        <servlet-class>coursematch.controllers.ShowSubjectsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditSubjectsController</servlet-name>
-        <servlet-class>Controllers.EditSubjectsController</servlet-class>
+        <servlet-class>coursematch.controllers.EditSubjectsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddSubjectsValidatorController</servlet-name>
-        <servlet-class>Controllers.AddSubjectsValidatorController</servlet-class>
+        <servlet-class>coursematch.controllers.AddSubjectsValidatorController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SubjectController</servlet-name>

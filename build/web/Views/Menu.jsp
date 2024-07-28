@@ -56,7 +56,7 @@
         </nav>
 
         <%
-            String name = session.getAttribute("student_name").toString();
+            String name =  session.getAttribute("student_name").toString();
             String surname = session.getAttribute("student_surname").toString();
         %>
 

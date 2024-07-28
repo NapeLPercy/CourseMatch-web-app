@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="/CourseMatch/Login.js" defer></script>
         <style>
             /* Custom styles */
             .custom-input {
@@ -24,11 +25,14 @@
                 transition: color 0.5s ease, opacity 5s ease, font-size 10s ease;
                 margin-left: 5px;
             }
+            #invalid_login{
+                margin-top: 10px;
+            }
         </style>
     </head>
     <body>
         <div class="container mt-5">
-            <form action="LoginController" method="POST" id="form">
+            <form action="Views/Menu.jsp" onsubmit="login(event);" method="GET" id="form">
                 <fieldset>
                     <legend>Login</legend>
 
@@ -42,6 +46,7 @@
                         <label for="password">Password</label>
                         <p id="password_error"></p>
                         <input type="password" class="form-control custom-input" id="password" name="password" >
+                        <p id="invalid_login"></p>
                     </div>
 
                     <p>Don't have account? click <a href="Views/Inputs/CreateAccount.jsp">here</a></p>
@@ -59,39 +64,3 @@
 <!-- Bootstrap JS (make sure this comes after jQuery) -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
-<script type="text/javascript">
-
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
-    const login_btn = document.getElementById("login_btn");
-
-    let password_valid = false;
-    let username_valid = false;
-
-    login_btn.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        if (username.value === "") {
-            updateErrorView(username_error, "You must enter a username");
-        } else {
-            updateErrorView(username_error, "");
-            username_valid = true;
-        }
-
-        if (password.value === "") {
-            updateErrorView(password_error, "You must enter a password");
-        } else {
-            updateErrorView(password_error, "");
-            password_valid = true;
-        }
-        
-        if(password_valid && username_valid){
-            document.getElementById("form").submit();
-        }
-    });
-    function updateErrorView(element_name, error_message) {
-        element_name.style.color = "red";
-        element_name.innerText = error_message;
-    }
-</script>
