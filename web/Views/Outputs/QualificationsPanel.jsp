@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Entities.Qualification"%>
+<%@page import="coursematch.entities.Qualification"%>
 <%@page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -126,7 +126,7 @@
                                     <p class="card-text"><strong>University:</strong> <%= university %></p>
                                     <p class="card-text"><strong>Course:</strong> <%= qualification.getName() %></p>
                                     <p class="card-text"><strong>Course Code:</strong> <%= qualification.getCode() %></p>
-                                    <p class="card-text"><strong>Minimum APS:</strong> <%= qualification.getMinimun_aps() %></p>
+                                    <p class="card-text"><strong>Minimum APS:</strong> <%= qualification.getMinimumAps() %></p>
                                     <p class="card-text"><strong>Faculty:</strong> <%= faculty %></p>
                                 </div>
                             </div>

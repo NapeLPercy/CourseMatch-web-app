@@ -41,7 +41,7 @@ const dialogue_container = document.getElementById("dialogue_container");
 const page_body = document.querySelector("body");
 const dialogue_error_message = document.getElementById("dialogue_message");
 
-//Submit Subject button onClick Listener
+//Submit Subject button Listener
 document.getElementById("submit_btn")
         .addEventListener("click", (event) => {
 
@@ -49,16 +49,16 @@ document.getElementById("submit_btn")
             if (sesotho_hl.value === "0" && isixhosa_hl.value === "0" && isizulu_hl.value === "0"
                     && sepedi_hl.value === "0" && english_hl.value === "0" && afrikaans_hl.value === "0") {
 
-                dialogue_error_message.innerText = "You have to select a Home Language";
+                dialogue_error_message.innerText = "A Home Language(HL) is required.";
                 displayDialogue(dialogue_container, page_body);
             } else if (english_fal.value === "0" && afrikaans_fal.value === "0") {
-                dialogue_error_message.innerText = "You have to select a First Additional Language";
+                dialogue_error_message.innerText = "First Additional Language(FAL) is required.";
                 displayDialogue(dialogue_container, page_body);
             } else if (mathematics.value === "0" && math_literacy.value === "0") {
-                dialogue_error_message.innerText = "You have to select a Mathematics or Math Literacy.";
+                dialogue_error_message.innerText = "Mathematics or Math Literacy is required.";
                 displayDialogue(dialogue_container, page_body);
             } else if (lo.value === "0") {
-                dialogue_error_message.innerText = "You have to select Life Orientation.";
+                dialogue_error_message.innerText = "Life Orientation is required..";
                 displayDialogue(dialogue_container, page_body);
             } else {
 
@@ -116,15 +116,15 @@ document.querySelectorAll("input").forEach(range => {
 
     range.addEventListener("input", (event) => {
 
-        let value = event.target.value;
-        let message = event.target.nextElementSibling;
-        message.innerText = value + "%";
+        event.target.nextElementSibling.innerText = event.target.value + "%";
         let target_range = event.target;
         if (isHomeLanguage(target_range)) {
             resetOtherRanges(target_range, home_language_ranges);
-        } else if (isFirstAdditional(target_range)) {
+        } else
+        if (isFirstAdditional(target_range)) {
             resetOtherRanges(target_range, first_additional_language_ranges);
-        } else if (target_range === mathematics || target_range === math_literacy) {
+        } else
+        if (target_range === mathematics || target_range === math_literacy) {
             resetOtherRanges(target_range, math_ranges);
         }
     });

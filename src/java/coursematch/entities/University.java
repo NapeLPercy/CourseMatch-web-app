@@ -1,20 +1,24 @@
 package coursematch.entities;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class University {
-    
+
     private String name;
     private String abbreviation;
-    private byte[] logo;
-    ArrayList<Qualification> qualifications;
+    private String url;
+    List<Faculty> faculties;
 
-     public University(){}
-     
-    public University(String name, String abbreviation, byte[] logo, ArrayList<Qualification> qualifications) {
+    public University() {
+        faculties = new ArrayList<>();
+    }
+
+    public University(String name, String abbreviation, String url, List<Faculty> faculties) {
         this.name = name;
         this.abbreviation = abbreviation;
-        this.logo = logo;
-        this.qualifications = qualifications;
+        this.url = url;
+        this.faculties = faculties;
     }
 
     public String getName() {
@@ -33,21 +37,20 @@ public class University {
         this.abbreviation = abbreviation;
     }
 
-    public byte[] getLogo() {
-        return logo;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLogo(byte[] logo) {
-        this.logo = logo;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public ArrayList<Qualification> getQualifications() {
-        return qualifications;
+    public List<Faculty> getFaculties() {
+        return faculties;
     }
 
-    public void setQualifications(ArrayList<Qualification> qualifications) {
-        this.qualifications = qualifications;
+    public void setFaculties(List<Faculty> faculties) {
+        this.faculties = faculties;
     }
-    
-    
+
 }

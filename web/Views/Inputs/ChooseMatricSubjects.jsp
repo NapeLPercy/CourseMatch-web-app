@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<%@page import="Entities.Student"%>
+<%@page import="coursematch.entities.Student"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Choose Subjects</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="/CourseMatch/Subjects.js" defer></scirpt>
+        <script src="/CourseMatch/Subjects.js" defer></script>
         <style>
             input[type="range"] {
                 width: 300px;
@@ -21,8 +21,8 @@
             }
 
             #submit_btn{
-                width: 200px;
-                margin: 25px 0px 100px 160px;
+                width:   200px;
+                margin: 25px 0px 1 0 0px 160px;
             }
 
 
@@ -36,20 +36,20 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
+                width:  100% ;
+                height: 100% ;
                 background: rgba(0, 0, 0, 0.5);
                 backdrop-filter: blur(5px);
                 display: none;
-                justify-content: center;
-                align-items: center;
+                justify-content: cente r ;
+                align-items:  c enter;
                 z-index: 999;
             }
 
             #dialogue {
                 background: white;
-                padding: 20px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20 p x;
+                box-shadow: 0 4px 8px   rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 text-align: center;
                 width: 800px;
@@ -57,12 +57,12 @@
                 margin-left: 20vw;
             }
 
-            #dialogue p {
-                margin: 0 0 20px 0;
+            #dialogue  p  {
+                margin: 0 0   20px 0;
             }
 
             #hide_dialogue {
-                padding: 10px 20px;
+                padding: 10px 20px ;
                 background: #007bff;
                 color: white;
                 border: none;
@@ -72,10 +72,10 @@
             }
 
             #hide_dialogue:hover {
-                background: #0056b3;
+                background :  #0056b3;
             }
 
-            #already_submitted{
+            #already_ s ubmitted{
                 text-align: center;
                 margin-top: 30px;
             }
@@ -85,30 +85,31 @@
                 font-family: Sans-Serif;
                 text-decoration: underline;
                 letter-spacing: 1.50px;
-                margin-bottom: 2px;
+                margin-bottom : 2px;
             }
 
-            .navbar-nav{
+            .navbar-nav {
                 margin-left: 600px;
             }
             <%-- #navbarNav {
-          margin-left: 600px;
-      }--%>
+            ma r gin-left: 600px;
+            }--%>
+
         </style>
     </head>
     <body>
 
         <%
-         if(session.getAttribute("username") == null){
-                             response.sendRedirect("/CourseMatch/index.html");
-                             return;
-            }
+                if(session.getAttribute("username") == null){
+                         response.sendRedirect("/CourseMatch/index.html");
+                         return;
+        }
         
-        if((Student)request.getAttribute("student")!= null){
+    if((Student)request.getAttribute("student")!= null){
         %>
         <h4 id="already_submitted">You already <b>submitted</b> your subjects, click <a href="/CourseMatch/ShowSubjectsController">here</a> to Edit or View your current subjects.</h4>
         <%
-          }else{
+      }else{
 
         %>
         <!-- Navigation Bar -->
@@ -260,6 +261,12 @@
         <%
 }
         %>
+
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     </body>
 </html>

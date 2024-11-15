@@ -1,58 +1,41 @@
 package coursematch.controllers;
 
+import coursematch.entities.Subject;
 import coursematch.services.SubjectService;
-import coursematch.utils.APSCalculator;
-import coursematch.utils.MatrixEndorsement;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map.Entry;
+import java.util.logging.*;
 
 public class SubjectController extends HttpServlet {
 
     private SubjectService subjectService;
-    private APSCalculator apsCalculator;
-    private MatrixEndorsement matrixEndorsementDeterminer;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Map<String, String[]> parameter_map = request.getParameterMap();//Get all the subjects that a student can potentially selects
-
         try {
+            subjectService = new SubjectService();
 
-            apsCalculator = new APSCalculator();
-            matrixEndorsementDeterminer = new MatrixEndorsement();
-            subjectService = new SubjectService(apsCalculator, matrixEndorsementDeterminer);
+            Map<String, String[]> allAvailableSubjects = request.getParameterMap();
 
-            //Get a map of all selected subjects, the parameterMap contains all the subjects that a student can potentially select
-            //Selected subjects will have a mark greater than 0%
-            Map<String, String[]> selectedSubjects = subjectService.getSelectedSubjects(parameter_map);
+            // Subjects selected by student will have a mark greater than 0%
+            Map<String, String[]> selectedSubjects = subjectService.getSelectedSubjects(allAvailableSubjects);
 
-            //Set subjects that student have selected, they have to be filtered before aps is calculated
-            apsCalculator.setStudentSubjectsInfo(selectedSubjects);
+            // Returns selected subjects as a list
+            List<Subject> subjectList = subjectService.computeSubjectList(selectedSubjects);
 
-            int studentAps = subjectService.getApsCalculator().calculateAPS();
+            //Get all subjects that will be used to calculate the APS
+            Map<String, String[]> apsSubjects = subjectService.getApsSubjects();
 
-            //Get all subjecst that a student selected, they will be used to determine a Student's Matrix Endorsement
-            //Unlike with APS, Life Orientation will be needed to calculate a Student's endorsement.
-            //At this point, Life Orientation can only be acquired from a map of all collected subjects 
-            Map<String, String[]> endorsementSubjects = apsCalculator.getEndorsementSubjects();//Identical to aps map subjects, add L.O to it
-            endorsementSubjects.put("subjects[Life Orientation]", parameter_map.get("subjects[Life Orientation]"));//Add LO to endorsement map
-            matrixEndorsementDeterminer.setStudentSubjects(endorsementSubjects);
-
-            //Calculate student endorsement based on set selected subjects
-            String studentEndorsement = matrixEndorsementDeterminer.getStudentEndorsement();
-
-            request.setAttribute("student_aps", studentAps);
-            request.setAttribute("selected_subjects", selectedSubjects);
-            request.setAttribute("student_endorsement", studentEndorsement);
+            request.setAttribute("selectedSubjects", selectedSubjects);
+            request.setAttribute("subjectList", subjectList);
+            request.setAttribute("apsSubjects", apsSubjects);
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SubjectController.class.getName()).log(Level.SEVERE, null, ex);

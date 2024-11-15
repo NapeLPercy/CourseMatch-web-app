@@ -1,6 +1,6 @@
 package coursematch.entities;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Student {
 
@@ -8,9 +8,10 @@ public class Student {
     private String surname;
     private int APS;
     private String endorsement;
-    private ArrayList<Subject> subjects;
+    private List<Subject> subjects;
+    private int studentId;
 
-    public Student(String name, String surname, int APS, String endorsement, ArrayList<Subject> subjects) {
+    public Student(String name, String surname, int APS, String endorsement, List<Subject> subjects) {
         this.name = name;
         this.surname = surname;
         this.APS = APS;
@@ -50,12 +51,19 @@ public class Student {
         this.endorsement = endorsement;
     }
 
-    public ArrayList<Subject> getSubject_list() {
+    public List<Subject> getSubjects() {
         return subjects;
     }
 
-    public void setSubject_list(ArrayList<Subject> subjects) {
+    public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
 
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
 }

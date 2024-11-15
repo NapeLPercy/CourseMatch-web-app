@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<%@page import="Entities.Subject"%>
+<%@page import="coursematch.entities.Subject"%>
 <%@page import="java.util.*"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Subjects</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="/CourseMatch/Subjects.js" defer></scirpt>
+        <script src="/CourseMatch/Subjects.js" defer></script>
         <style>
             input[type="range"] {
                 width: 300px;
@@ -321,5 +321,15 @@
 }
      
         %>
+
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     </body>
 </html>
+
+<script></script>
+

@@ -1,4 +1,4 @@
-package coursematch.entities;
+ package coursematch.entities;
 
 public class PrerequisiteSubject {
 

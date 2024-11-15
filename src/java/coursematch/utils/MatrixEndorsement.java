@@ -4,6 +4,88 @@ import java.util.Map;
 
 public class MatrixEndorsement {
 
+    private static final int MIN_HOME_LANGUAGE_MARK = 40;
+    private static final int MIN_HIGH_CREDIT_MARK = 40;
+    private static final int MIN_OTHER_MARK = 30;
+    private static final int MIN_SUBJECTS_PASS = 6;
+
+    private Map<String, String[]> studentSubjects;
+
+    public MatrixEndorsement(Map<String, String[]> studentSubjects) {
+        this.studentSubjects = studentSubjects;
+    }
+
+    public MatrixEndorsement() {
+    }
+
+    public void setStudentSubjects(Map<String, String[]> studentSubjects) {
+        this.studentSubjects = studentSubjects;
+    }
+
+    public String getStudentEndorsement() {
+        if (isBachelor()) {
+            return "Bachelor";
+        } else if (isDiploma()) {
+            return "Diploma";
+        } else if (isCertificate()) {
+            return "Higher Certificate";
+        }
+        return "Does not have NSC";
+    }
+
+    private boolean isBachelor() {
+        return hasMinimumMarks(MIN_HIGH_CREDIT_MARK, 4)
+                && hasMinimumMarks(MIN_OTHER_MARK, 2)
+                && hasPassedMinimumSubjects();
+    }
+
+    private boolean isDiploma() {
+        return hasMinimumMarks(MIN_HIGH_CREDIT_MARK, 4)
+                && hasMinimumMarks(MIN_OTHER_MARK, 2)
+                && hasPassedMinimumSubjects();
+    }
+
+    private boolean isCertificate() {
+        return hasMinimumMarks(MIN_HIGH_CREDIT_MARK, 2)
+                && hasMinimumMarks(MIN_OTHER_MARK, 3)
+                && hasPassedMinimumSubjects();
+    }
+
+    private boolean hasMinimumMarks(int minimumMark, int requiredCount) {
+        int count = 0;
+        for (Map.Entry<String, String[]> entry : studentSubjects.entrySet()) {
+            String subjectName = entry.getKey();
+            int mark = Integer.parseInt(entry.getValue()[0]);
+
+            if (isHomeLanguage(subjectName) && mark < MIN_HOME_LANGUAGE_MARK) {
+                return false;
+            } else if (mark >= minimumMark) {
+                count++;
+            }
+        }
+        return count >= requiredCount;
+    }
+
+    private boolean hasPassedMinimumSubjects() {
+        long failedSubjects = studentSubjects.values().stream()
+                .map(subject -> Integer.parseInt(subject[0]))
+                .filter(mark -> mark < MIN_OTHER_MARK)
+                .count();
+        return studentSubjects.size() - failedSubjects >= MIN_SUBJECTS_PASS;
+    }
+
+    private boolean isHomeLanguage(String subjectName) {
+        return subjectName.endsWith("HL");
+    }
+
+}
+
+/*package coursematch.utils;
+
+import java.util.Map;
+
+public class MatrixEndorsement {
+
     private Map<String, String[]> studentSubjects;
 
     public MatrixEndorsement(Map<String, String[]> studentSubjects) {
@@ -19,16 +101,14 @@ public class MatrixEndorsement {
 
     public String getStudentEndorsement() {
 
-        String endorsement = "You do not have matrix";
-
         if (isBarchelor()) {
-            endorsement = "Barchelor";
+            return "Barchelor";
         } else if (isDiploma()) {
-            endorsement = "Diploma";
+            return "Diploma";
         } else if (isCertificate()) {
-            endorsement = "Higher Certificate";
+            return "Higher Certificate";
         }
-        return endorsement;
+        return "Does not have NCS";
     }//end
 
     /*
@@ -36,7 +116,7 @@ public class MatrixEndorsement {
                          :  50% for four other high credit subjects (excluding Life Orientation)
                          :  At least 30% for two other subjects
                          :  Must pass 6 out of 7 subjects
-     */
+     
     private boolean isBarchelor() {
 
         boolean is_barchelor = false;
@@ -77,7 +157,8 @@ public class MatrixEndorsement {
                           :  40% for four other high credit subjects (excluding Life Orientation)
                           :  30% for two other subjects
                           :  Must pass 6 out of 7 subjects
-     */
+     
+    //v1 -> 
     private boolean isDiploma() {
 
         boolean is_diploma = false;
@@ -119,7 +200,7 @@ public class MatrixEndorsement {
                           :  40% in two other subjects
                           : 30% for three other subjects
                           : Must pass 6 out of 7 subjects
-     */
+     
     private boolean isCertificate() {
 
         boolean is_certificate = false;
@@ -157,3 +238,4 @@ public class MatrixEndorsement {
     }//end
 
 }
+ */

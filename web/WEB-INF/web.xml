@@ -36,6 +36,10 @@
         <servlet-name>AddSubjectsValidatorController</servlet-name>
         <servlet-class>coursematch.controllers.AddSubjectsValidatorController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>coursematch.controllers.Controller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubjectController</servlet-name>
         <url-pattern>/SubjectController</url-pattern>
@@ -71,5 +75,9 @@
     <servlet-mapping>
         <servlet-name>AddSubjectsValidatorController</servlet-name>
         <url-pattern>/AddSubjectsValidatorController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
 </web-app>

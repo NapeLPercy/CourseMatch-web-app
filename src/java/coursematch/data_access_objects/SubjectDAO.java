@@ -5,6 +5,7 @@ import coursematch.entities.Subject;
 import coursematch.utils.Random;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SubjectDAO {
 
@@ -27,7 +28,7 @@ public class SubjectDAO {
 
     }//end
 
-    public boolean addSubjects(ArrayList<Subject> subjects_list, int student_id) throws SQLException, ClassNotFoundException {
+    public boolean addSubjects(List<Subject> subjects_list, int student_id) throws SQLException, ClassNotFoundException {
 
         String sql = "INSERT INTO coursematchdb.subject "
                 + "VALUES(?,?,?,?) ";

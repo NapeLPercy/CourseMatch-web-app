@@ -1,11 +1,11 @@
 package coursematch.data_access_objects;
 
 import coursematch.database_manager.CourseMatchDB;
-import coursematch.entities.Student;
-import coursematch.entities.Subject;
+import coursematch.entities.*;
 import coursematch.utils.Random;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDAO {
 
@@ -13,7 +13,6 @@ public class StudentDAO {
 
     public StudentDAO() throws SQLException, ClassNotFoundException {
         connection = new CourseMatchDB();
-
     }
 
     private boolean checkStudentIDExistence(int student_id) throws SQLException, ClassNotFoundException {
@@ -41,7 +40,7 @@ public class StudentDAO {
 
         //add list of subjects to subject table
         SubjectDAO subject_dao = new SubjectDAO();
-        ArrayList<Subject> subject_list = student.getSubject_list();
+        List<Subject> subjectList = student.getSubjects();
 
         String sql = "INSERT INTO coursematchdb.student "
                 + "VALUES(?,?,?,?,?,?)";
@@ -57,7 +56,8 @@ public class StudentDAO {
             ps.executeUpdate();
         }
 
-        subject_dao.addSubjects(subject_list, student_id);
+        // Persist student subjects
+        subject_dao.addSubjects(subjectList, student_id);
 
     }//end
 
@@ -79,7 +79,7 @@ public class StudentDAO {
     }//end
 
     //select student subjects from database, this will be used to compare a course's prerequisite subjects to the subject that the student have submitted
-    public ArrayList<Subject> selectAllStudentSubjects(String id_number) throws SQLException, ClassNotFoundException {
+    public List<Subject> selectAllStudentSubjects(String id_number) throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT name, mark FROM coursematchdb.student st "
                 + "INNER JOIN coursematchdb.subject su ON st.student_id = su.student_id "
@@ -88,7 +88,7 @@ public class StudentDAO {
         PreparedStatement ps = connection.getConnection().prepareStatement(sql);
         ps.setString(1, id_number);
 
-        ArrayList<Subject> student_subjects = new ArrayList<>();
+        List<Subject> student_subjects = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -188,4 +188,5 @@ public class StudentDAO {
         return student;
     }//end
 
+    
 }

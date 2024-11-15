@@ -1,24 +1,24 @@
 package coursematch.entities;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Qualification {
 
     private String name;
     private String code;
     private int minimumAps;
-    private String faculty;
-    private ArrayList<PrerequisiteSubject> prerequisiteSubjects;
+    private String minumumEndorsement;
+    private int duration;
+    private List<PrerequisiteSubject> prerequisiteSubjects;
 
     public Qualification() {
     }
 
-    public Qualification(String name, String code,
-            int minimumAps, String faculty, ArrayList<PrerequisiteSubject> prerequisiteSubjects) {
+    public Qualification(String name, String code, int minimumAps, int duration, List<PrerequisiteSubject> prerequisiteSubjects) {
         this.name = name;
         this.code = code;
         this.minimumAps = minimumAps;
-        this.faculty = faculty;
+        this.duration = duration;
         this.prerequisiteSubjects = prerequisiteSubjects;
     }
 
@@ -46,15 +46,23 @@ public class Qualification {
         this.minimumAps = minimumAps;
     }
 
-    public String getFaculty() {
-        return faculty;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public ArrayList<PrerequisiteSubject> getPrerequisiteSubjects() {
+    public String getMinumumEndorsement() {
+        return minumumEndorsement;
+    }
+
+    public void setMinumumEndorsement(String minumumEndorsement) {
+        this.minumumEndorsement = minumumEndorsement;
+    }
+
+    public List<PrerequisiteSubject> getPrerequisiteSubjects() {
         return prerequisiteSubjects;
     }
 

@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +28,7 @@ public class ShowSubjectsController extends HttpServlet {
             HttpSession session = request.getSession();
 
             String idNumber = session.getAttribute("student_id_number").toString();
-            ArrayList<Subject> studentSubjects = studentService.selectAllStudentSubjects(idNumber);
+            List<Subject> studentSubjects = studentService.selectAllStudentSubjects(idNumber);
 
             String studentEndorsement = session.getAttribute("student_endorsement").toString();
 
@@ -37,7 +38,7 @@ public class ShowSubjectsController extends HttpServlet {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ShowSubjectsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         request.getRequestDispatcher("/Views/Inputs/EditSubjects.jsp").forward(request, response);
     }
 }

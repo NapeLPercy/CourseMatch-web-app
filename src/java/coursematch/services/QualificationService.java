@@ -1,12 +1,9 @@
 package coursematch.services;
 
 import coursematch.data_access_objects.QualificationDAO;
-import coursematch.entities.PrerequisiteSubject;
-import coursematch.entities.Qualification;
-import coursematch.entities.Subject;
+import coursematch.entities.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 public class QualificationService {
 
@@ -16,27 +13,51 @@ public class QualificationService {
         qualificationDao = new QualificationDAO();
     }
 
-    public ArrayList<Qualification> filterQualificationsUsingAPS(int student_aps, String student_endorsement) throws SQLException, ClassNotFoundException {
-        
-        if(student_endorsement.equals("Barchelor")){//if a student acquired a Barchelor, they automatically qualify for Diploma
-          student_endorsement = "Diploma";
+    public List<Qualification> filterQualificationsUsingAPS(int studentAps) throws SQLException, ClassNotFoundException {
+        return qualificationDao.filterQualificationsUsingAPS(studentAps);
+    }
+
+    public List<Qualification> filterQualificationsUsingEndorsement(List<Qualification> apsQualified, String studentEndorsement) {
+
+        List<Qualification> qualifications = new ArrayList<>();
+
+        for (Qualification qualification : apsQualified) {
+
+            String minimumEndorsement = qualification.getMinumumEndorsement();
+
+            if (minimumEndorsement.equals("Certificate")
+                    && (studentEndorsement.equals("Barchelor") || studentEndorsement.equals("Diploma"))) {
+
+                qualifications.add(qualification);
+
+            } else if (minimumEndorsement.equals("Diploma")
+                    && (studentEndorsement.equals("Barchelor") || studentEndorsement.equals("Diploma"))) {
+
+                qualifications.add(qualification);
+
+            } else if (minimumEndorsement.equals("Barchelor") && studentEndorsement.equals("Barchelor")) {
+                qualifications.add(qualification);
+            }
         }
-        return qualificationDao.filterQualificationsUsingAPS(student_aps, student_endorsement);
+
+        return qualifications;
     }
 
 //Check if student has prerequisite Subjects
 //Compare student subjects to the subjects in a prerequisite subjects, if the prerequisite subjects are all matched, then student qualifies for the course 
-//The method receives a list of all qualifications and subjects that a student has. It checks whether or not the student has a prerequisite subject for certain qualifications. If they don't, the qualification is removed from the list of qualifications they qualify for.
+/*The method receives a list of all qualifications and subjects that a student has. 
+  It checks whether or not the student has a prerequisite subject for certain qualifications.
+If they don't, the qualification is removed from the list of qualifications they qualify for
+     */
 //getMinimum_mark()getPrerequisite_subjects()
-    
-public ArrayList<Qualification> filterQualificationsUsingPrerequisiteSubject(
-            ArrayList<Qualification> apsQualifiedQualifications, ArrayList<Subject> studentSubjects) {
+    public List<Qualification> filterQualificationsUsingPrerequisiteSubject(
+            List<Qualification> apsQualifiedQualifications, List<Subject> studentSubjects) {
 
         Iterator<Qualification> qualificationIterator = apsQualifiedQualifications.iterator();
 
         while (qualificationIterator.hasNext()) {
             Qualification qualification = qualificationIterator.next();
-            ArrayList<PrerequisiteSubject> prerequisiteSubjects = qualification.getPrerequisiteSubjects();//list of a qualification's prerequisite subjects
+            List<PrerequisiteSubject> prerequisiteSubjects = qualification.getPrerequisiteSubjects();//list of a qualification's prerequisite subjects
 
             boolean hasAllPrerequisites = true;
 
@@ -83,4 +104,5 @@ public ArrayList<Qualification> filterQualificationsUsingPrerequisiteSubject(
 
         return apsQualifiedQualifications;
     }
-    }
+
+}

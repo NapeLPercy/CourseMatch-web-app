@@ -64,7 +64,7 @@
         <div class="container content-container">
             <p>Hello <%= surname %> <%= name %>, </p>
             <h1>Welcome to CourseMatch</h1>
-            <p>Use the navigation bar to add or edit subjects, view courses or to log out.</p>
+            <p>Use the navigation bar to add or edit subjects,  and view courses.</p>
         </div>
 
         <!-- Bootstrap JS and dependencies -->

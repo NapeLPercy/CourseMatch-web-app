@@ -50,7 +50,7 @@
 
         <div class="centered-container">
             <img src="Icons/success.png" width="100" height="100" alt="Check"/>
-            <p>Subject successfully added!</p>
+            <p>Subjects successfully added!</p>
             <div>
                 <a href="/CourseMatch/QualificationController" class="get-started-button">View Courses</a>
             </div>

@@ -53,8 +53,6 @@ public class AccountDAO {
         String sql = "SELECT username, password FROM coursematchdb.account"
                 + " WHERE username=? AND password=? ";
         PreparedStatement ps = connection.getConnection().prepareStatement(sql);
-        System.out.println(account.getUsername());
-        System.out.println(account.getPassword());
 
         ps.setString(1, account.getUsername());
         ps.setString(2, account.getPassword());
@@ -103,7 +101,6 @@ public class AccountDAO {
             }
             ps.close();
         }
-
         return account_holder_details;
     }//end
 
